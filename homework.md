@@ -34,3 +34,14 @@
 - Difference between app.use and app.all
 - Write a dummy auth middleware for admin
 - Write a dummy auth middleware for all user routes , except /user/login  
+- error handling using app.use("/",(err,req,res,next)=>{})
+
+HomeWork 4
+- Create a free cluster on MongoDB official website (Mongo Atlas)
+- Install mongoose Library
+- Connect Your application to the Database "Connection-url"/devTinder
+- call the connectDB function and connect to database before starting application on 7777
+- create a userSchema and userModel
+- Create /signup API to add to database
+- Push some documents using API calls from POSTMAN
+- Error handling using try , catch
