@@ -1,0 +1,10 @@
+-create a repository
+-intialize the repository
+- node_modules, package.json, package-lock.json
+-install express
+-listen to port 7777
+- write request handlers for /test , /hello
+-install nodemon and update scripts inside package.json
+-diff between carrot and tilde
+-what are the dependencies
+- use of -g
