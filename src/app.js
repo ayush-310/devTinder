@@ -1,30 +1,29 @@
 const express = require('express');
-
+const { adminAuth, userAuth } = require('../middlewares/auth');
 const app = express();
 
-//This will only handle GET call to /user
-app.get("/user", (req, res) => {
-    res.send({ firstName: 'John', lastName: 'Doe' });
-})
+// Handle Auth Middleware for all GET , POST,......requests
+app.use("/admin", adminAuth);
+app.use("/user", userAuth);
 
-// Dynamic Route 
-app.get("/user/:userId/:name/:password", (req, res) => {
-    console.log(req.params);
-    res.send({ firstName: 'Ayush', lastName: 'Srivastava' });
-})
+app.use("/user/login",(req,res)=>{
+    res.send("User is logged in successfully");
+});
 
-app.post("/user", (req, res) => {
-    res.send('User saved');
-})
+app.use("/user/data", userAuth,(req,res)=>{
+    res.send("User data sent");
+});
 
-app.delete("/user", (req, res) => {
-    res.send('User deleted');
-})  
 
-// THis will match all the HTTP method API calls to /test
-app.use("/test", (req, res) => {
-    res.send('Hello World');
-})
+
+
+app.get("/admin/getAllData", (req, res) => {
+    res.send("All Data is sent");
+});
+
+app.get("/admin/deleteData", (req, res) => {
+    res.send("Data is deleted");
+});
 
 
 app.listen(3000, () => {
