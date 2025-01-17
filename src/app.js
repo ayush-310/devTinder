@@ -7,6 +7,12 @@ app.get("/user", (req, res) => {
     res.send({ firstName: 'John', lastName: 'Doe' });
 })
 
+// Dynamic Route 
+app.get("/user/:userId/:name/:password", (req, res) => {
+    console.log(req.params);
+    res.send({ firstName: 'Ayush', lastName: 'Srivastava' });
+})
+
 app.post("/user", (req, res) => {
     res.send('User saved');
 })

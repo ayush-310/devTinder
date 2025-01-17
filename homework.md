@@ -19,3 +19,7 @@
 - **order of the routes matter**
 - Install Postman app and make a workspace/collection > test API call
 - Write logic to handle GET, POST, PATCH, DELETE API Calls and test them on POSTMAN
+- Explore routing and use of ? , + , (), * in the routes
+- use of regex in routes /a/, /.*fly$/
+- Reading the query params in the routes 
+- Reading the dynamic routes
