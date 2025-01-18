@@ -68,3 +68,4 @@ HomeWork 6
 - DATA Sanatization -  Add API validation for each field
 - Install Validator 
 - Explore Validator functions, library and use validator functions for password , email, URL
+- NEVER TRUST req.body
