@@ -64,3 +64,5 @@ HomeWork 6
 - Add default
 - Create a custom validate function for gender
 - Add timestamps to the userSchema
+- Add API level validation on Patch request & Signup post api
+- DATA Sanatizing -  Add API validation for each field
