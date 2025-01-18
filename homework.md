@@ -83,3 +83,8 @@ HomeWork7
 - create GET/profile API and check if you get the cookie back
 - In login API , after email and password validation, create a JWT token and send it back to user
 - read the cookie inside your profile API and find the logged in user
+- userAuth Middleware
+- Add the userAuth middleware in profile API ans a new sendConnectionRequest API
+- set the expiry of JWT token and cookie to the 7 days after
+- Create userSchema method to getJWT()
+- Create UserSchema method to comparepassword(passwordInputByUser) 
