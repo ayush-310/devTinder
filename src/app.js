@@ -2,18 +2,106 @@ const express = require('express');
 const app = express();
 const connectDB = require('./config/database');
 const User = require('./models/user');
+const { validateSignUpData } = require('./utils/validation');
+const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
+// Read JSON data from the request body
 app.use(express.json());
 
-app.post("/signup", async (req, res) => {
-    // Creating a new Instance of the User Model 
-    const user = new User(req.body);
+// Read cookie from the request body
+app.use(cookieParser());
 
+
+
+app.post("/signup", async (req, res) => {
     try {
+        // Validating the data
+        validateSignUpData(req);
+
+        // Encrypt the password
+        const { firstName, lastName, emailId, password } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        console.log(hashedPassword);
+
+        // Creating a new Instance of the User Model 
+        const user = new User({
+            firstName,
+            lastName,
+            emailId,
+            password: hashedPassword,
+        });
+
         await user.save();
         res.send('User added successfully');
     } catch (error) {
-        res.status(400).send("Error while saving the user " + error.message);
+        res.status(400).send("ERROR : " + error.message);
+    }
+})
+
+
+// Login API - POST /login - login the user
+app.post("/login", async (req, res) => {
+    try {
+        const { emailId, password } = req.body;
+
+        //    check if email exist in database
+        const user = await User.findOne({ emailId: emailId });
+        if (!user) {
+            throw new Error("Invalid Credentials");
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+
+        if (isPasswordValid) {
+
+            // Create a JWT Token
+            const token = jwt.sign({ _id: user._id }, "DEV@Tinder790");
+            console.log(token);
+
+            // Add the token to cookie and send the response back to the user
+            res.cookie("token", token)
+            res.send("Login Succesfully");
+        } else {
+            throw new Error("Invalid Credentials");
+        }
+
+
+    } catch (error) {
+        res.status(400).send("ERROR : " + error.message);
+    }
+})
+
+
+app.get("/profile", async (req, res) => {
+    try {
+        const cookies = req.cookies;
+
+        const { token } = cookies;
+
+        if (!token) {
+            throw new Error("Invalid Token");
+        }
+
+        // Validating the token
+        const decoded = jwt.verify(token, "DEV@Tinder790");
+        console.log(decoded);
+
+        const { _id } = decoded;
+        console.log("logged in user id" + _id);
+
+        const user = await User.findById(_id);
+
+        // if token is valid but user does not exist
+        if (!user) {
+            throw new Error("user does not exist");
+        }
+
+        res.send(user);
+    }
+    catch (error) {
+        res.status(400).send("ERROR : " + error.message);
     }
 })
 
@@ -77,7 +165,7 @@ app.patch("/user/:userId", async (req, res) => {
             throw new Error("Update not allowed");
         }
 
-        if(data?.skills.length>10){
+        if (data?.skills.length > 10) {
             throw new Error("Skills cannot be more than 10");
         }
 

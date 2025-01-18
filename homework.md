@@ -69,3 +69,16 @@ HomeWork 6
 - Install Validator 
 - Explore Validator functions, library and use validator functions for password , email, URL
 - NEVER TRUST req.body
+
+HomeWork7
+- validate data in signup API (validator function)
+- Install bcrypt package
+- Create Passwordhash using bcrypt.hash & save the user is encrypted password
+
+- Create Login API
+- Compare passwords and throw errors if email or password is invalid
+
+- install cookie-parser
+- just send a dummy cookie to user
+- create GET/profile API and check if you get the cookie back
+- In login API , after email and password validation, create a JWT token and send it to user
