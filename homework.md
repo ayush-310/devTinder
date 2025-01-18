@@ -50,3 +50,10 @@ HomeWork 5
 - difference between JSON and JavaScript
 - Add the express.json() middleware to your app
 - make your signup API dynamic to recieve data from the end user
+- API - Get user by email
+- API - Feed API - GET/feed - get all the users from the database
+- API get user by id
+- API - Update a user data 
+- Explore mongoose documentation specially models
+- what are options in a model.findOneAndUpdate ,  explore more about it 
+- API - Update the user with emailID
