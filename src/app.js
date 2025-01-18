@@ -6,6 +6,7 @@ const { validateSignUpData } = require('./utils/validation');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const { userAuth } = require('./middlewares/auth');
 
 // Read JSON data from the request body
 app.use(express.json());
@@ -74,30 +75,9 @@ app.post("/login", async (req, res) => {
 })
 
 
-app.get("/profile", async (req, res) => {
+app.get("/profile", userAuth, async (req, res) => {
     try {
-        const cookies = req.cookies;
-
-        const { token } = cookies;
-
-        if (!token) {
-            throw new Error("Invalid Token");
-        }
-
-        // Validating the token
-        const decoded = jwt.verify(token, "DEV@Tinder790");
-        console.log(decoded);
-
-        const { _id } = decoded;
-        console.log("logged in user id" + _id);
-
-        const user = await User.findById(_id);
-
-        // if token is valid but user does not exist
-        if (!user) {
-            throw new Error("user does not exist");
-        }
-
+        const user = req.user;
         res.send(user);
     }
     catch (error) {

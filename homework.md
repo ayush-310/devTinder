@@ -81,4 +81,5 @@ HomeWork7
 - install cookie-parser
 - just send a dummy cookie to user
 - create GET/profile API and check if you get the cookie back
-- In login API , after email and password validation, create a JWT token and send it to user
+- In login API , after email and password validation, create a JWT token and send it back to user
+- read the cookie inside your profile API and find the logged in user
