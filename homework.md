@@ -45,3 +45,6 @@ HomeWork 4
 - Create /signup API to add to database
 - Push some documents using API calls from POSTMAN
 - Error handling using try , catch
+
+HomeWork 5
+- difference between JSON and JavaScript
