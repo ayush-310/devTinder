@@ -65,4 +65,6 @@ HomeWork 6
 - Create a custom validate function for gender
 - Add timestamps to the userSchema
 - Add API level validation on Patch request & Signup post api
-- DATA Sanatizing -  Add API validation for each field
+- DATA Sanatization -  Add API validation for each field
+- Install Validator 
+- Explore Validator functions, library and use validator functions for password , email, URL
