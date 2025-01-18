@@ -57,3 +57,10 @@ HomeWork 5
 - Explore mongoose documentation specially models
 - what are options in a model.findOneAndUpdate ,  explore more about it 
 - API - Update the user with emailID
+
+HomeWork 6
+- Explore schematype options from the documentation
+-add required, unique, lowercase, min, minLength, trim
+- Add default
+- Create a custom validate function for gender
+- Add timestamps to the userSchema
