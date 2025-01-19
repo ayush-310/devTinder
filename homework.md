@@ -88,3 +88,11 @@ HomeWork7
 - set the expiry of JWT token and cookie to the 7 days after
 - Create userSchema method to getJWT()
 - Create UserSchema method to comparepassword(passwordInputByUser) 
+
+HomeWork 8
+- Explore tinder APIs
+- Create a list of all APIS of DevTinder
+- Group multiple routes under respective routers
+- Read documentation for express.Router
+- Create routes folder for managing auth, profile, request routers
+- Import these routers in app.js
