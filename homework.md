@@ -96,3 +96,7 @@ HomeWork 8
 - Read documentation for express.Router
 - Create routes folder for managing auth, profile, request routers
 - Import these routers in app.js
+- Create POST/logout API
+- Create PATCH /profile/edit
+- Create PATCH /profile/password API => forget Password API 
+- Make sure you validate all data in every POST , PATCH apis

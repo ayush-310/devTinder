@@ -1,4 +1,5 @@
 const validator = require('validator');
+// const { all } = require('../routes/auth');
 
 const validateSignUpData = (req) => {
 
@@ -14,4 +15,27 @@ const validateSignUpData = (req) => {
     }
 }
 
-module.exports = { validateSignUpData };
+
+const validateProfileEditData = (req) => {
+    const allowedEditfields = [
+        'firstName',
+        'lastName',
+        'emailId',
+        'age',
+        'gender',
+        'photoUrl',
+        'about',
+        'skills',
+    ];
+
+    const isallowedEdit = Object.keys(req.body).every((field) => 
+        allowedEditfields.includes(field)
+    );
+
+    return isallowedEdit;
+};
+
+module.exports = {
+    validateSignUpData,
+    validateProfileEditData
+};

@@ -62,4 +62,23 @@ authRouter.post("/login", async (req, res) => {
     }
 })
 
+// Logout API - GET /logout - logout the user
+authRouter.post("/logout", (req, res) => {
+    try {
+
+        res.cookie("token", null, {
+            expires: new Date(Date.now()),
+        });
+
+        
+        // Clear the cookie containing the JWT token
+        // res.clearCookie("token");
+        // res.redirect("/login");
+        // Send a success response
+        res.status(200).send("Logged out successfully");
+    } catch (error) {
+        res.status(500).send("Error while logging out: " + error.message);
+    }
+});
+
 module.exports = authRouter;

@@ -8,7 +8,7 @@
 ## ProfileRouter
 - GET/profile/view
 - PATCH/profile/edit
-- PATCH/profile/password (diff API for updating email,password)
+- PATCH/profile/password // Forget Password API
 
 
 ## ConnectionRequestRouter
