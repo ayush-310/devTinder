@@ -100,3 +100,15 @@ HomeWork 8
 - Create PATCH /profile/edit
 - Create PATCH /profile/password API => forget Password API 
 - Make sure you validate all data in every POST , PATCH apis
+
+HomeWork 9
+- Create Connection requestSchema 
+- Send Connection Request API
+- Proper Validation of Data
+- Think about All Corner cases
+- $or query $and query in mongoose request 
+- Schema.pre("save") function
+- Read more about indexes 
+- Why do we need indexes
+- What is the advantages and disadvantages of indexes
+- Read article about compound Indexes

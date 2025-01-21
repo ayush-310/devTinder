@@ -16,7 +16,7 @@ const requestRouter = require('./routes/request');
 app.use('/', authRouter);
 app.get('/profile/view', profileRouter);
 app.patch('/profile/edit', profileRouter);
-app.use('/request', requestRouter);
+app.post('/request/send/:status/:toUserId', requestRouter);
 
 
 
