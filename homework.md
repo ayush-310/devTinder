@@ -112,3 +112,10 @@ HomeWork 9
 - Why do we need indexes
 - What is the advantages and disadvantages of indexes
 - Read article about compound Indexes
+- ALWAYS THINK ABOUT CORNER CASES
+
+HomeWork 10
+- Write code with proper validation /request/review/:status/:requestId
+- Read about ref and populate in mongoose
+- Create GET /user/requests/received with all the checks
+- Create GET  /user/connections

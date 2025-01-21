@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 const connectionRequestSchema = new mongoose.Schema({
     fromUserId: {
         type: mongoose.Schema.Types.ObjectId,
+        ref : 'User', // Creating Relationship : Reference to the User model
         required: true,
     },
     toUserId: {
         type: mongoose.Schema.Types.ObjectId,
+        ref : 'User', // Creating Relationship : Reference to the User model
         required: true,
     },
     status: {
