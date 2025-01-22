@@ -119,3 +119,22 @@ HomeWork 10
 - Read about ref and populate in mongoose
 - Create GET /user/requests/received with all the checks
 - Create GET  /user/connections
+
+HomeWork 11
+- Logic for GET /feed API
+- Explore the $nin , $ne , $and and other query operators
+
+- Pagination
+
+/feed?page=1&Limit=10 => 1-10 (.skip(0) .limit(10))
+
+/feed?page=2&Limit=10 => 11-20 (.skip(10) .limit(10))
+
+/feed?page=3&Limit=10 => 21-30 (.skip(20) .limit(10))
+
+.skip() & .limit() -> MongoDB function
+
+eg .skip(0) .limit(10) -> five first 10 User
+ .skip(10) .limit(10) -> next 10 User
+
+ skip = (page - 1) * limit

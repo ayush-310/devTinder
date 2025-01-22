@@ -3,6 +3,7 @@ const { userAuth } = require('../middlewares/auth');
 const ConnectionRequest = require('../models/connectionRequest');
 const { connections } = require('mongoose');
 const userRouter = express.Router();
+const User = require('../models/user');
 
 const USER_SAFE_DATA = ["firstName", "lastName", "age", "about", "email", "skills", "gender", "photoUrl"];
 
@@ -63,6 +64,62 @@ userRouter.get("/user/connections", userAuth, async (req, res) => {
 });
 
 
+userRouter.get("/feed", userAuth, async (req, res) => {
+    try {
+        // User should see all the other user cards except
+        // 1) his  own card
+        // 2) his connection
+        // 3) ignored people
+        // 4) already sent the connection request
+
+        // Example: Rahul =>[Akshay , Elon, Mark,Donald , MS Dhoni, virat ]
+        // Rahul->Akshay->rejected, Rahul->Elon->Accepted
+        // Elon see all users except Rahul
+
+        const loggedInUser = req.user;
+
+        const page = parseInt(req.query.page) || 1;
+        let limit = parseInt(req.query.limit) || 10;
+
+        limit = limit > 50 ? 50 : limit;
+
+        const skip = (page - 1) * limit;
+
+        // Find all connection requests (sent + received)
+        const connectionRequests = await ConnectionRequest.find({
+            $or: [
+                { fromUserId: loggedInUser._id },
+                { toUserId: loggedInUser._id }
+            ]
+        })
+            .select("fromUserId toUserId")
+        // .populate("fromUserId", "firstName") // Removed extra space
+        // .populate("toUserId", "firstName"); // Removed extra space
+
+
+        const hideUsersFromFeed = new Set();
+        connectionRequests.forEach((row) => {
+            hideUsersFromFeed.add(row.fromUserId.toString());
+            hideUsersFromFeed.add(row.toUserId.toString());
+        })
+
+        // Find all the users except the hideUsersFromFeed user and loggedInUser
+        const users = await User.find({
+            $and: [
+                { _id: { $ne: loggedInUser._id } },
+                { _id: { $nin: Array.from(hideUsersFromFeed) } }
+            ]
+        }).select(USER_SAFE_DATA).skip(skip).limit(limit);
+
+        // Send the connection requests as the result
+        res.send(users);
+
+
+
+    } catch (error) {
+        res.status(400).send("ERROR" + error.message);
+    }
+})
 
 
 module.exports = userRouter;
