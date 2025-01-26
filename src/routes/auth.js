@@ -23,8 +23,19 @@ authRouter.post("/signup", async (req, res) => {
             password: hashedPassword,
         });
 
-        await user.save();
-        res.send('User added successfully');
+        const savedUser = await user.save();
+
+
+        // Create a JWT Token
+        const token = await savedUser.getJWT();
+
+        // Add the token to cookie and send the response back to the user
+        res.cookie("token", token, {
+            expires: new Date(Date.now() + 8 * 3600000),
+        });
+
+        res.json({ message: 'User added successfully', data: savedUser });
+
     } catch (error) {
         res.status(400).send("ERROR : " + error.message);
     }
@@ -50,8 +61,8 @@ authRouter.post("/login", async (req, res) => {
             // Add the token to cookie and send the response back to the user
             res.cookie("token", token, {
                 expires: new Date(Date.now() + 604800000),
-            })
-            res.send("Login Succesfully");
+            });
+            res.send(user);
         } else {
             throw new Error("Invalid Credentials");
         }
@@ -70,7 +81,7 @@ authRouter.post("/logout", (req, res) => {
             expires: new Date(Date.now()),
         });
 
-        
+
         // Clear the cookie containing the JWT token
         // res.clearCookie("token");
         // res.redirect("/login");

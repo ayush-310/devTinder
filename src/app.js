@@ -2,6 +2,13 @@ const express = require('express');
 const app = express();
 const connectDB = require('./config/database');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
+
+// Ensures that the API can be accessed by the frontend
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+}));
 
 // Read JSON data from the request body
 app.use(express.json());
